@@ -18,8 +18,19 @@ function Todos() {
 
   const handleAdd = () => {
     const todo = { id: uuidv4(), title: addTodo };
-    setTodos([...todos, todo]);
+    setTodos([todo, ...todos]);
     setAddTodo("");
+  };
+
+  const handleEdit = () => {
+    const newTodos = todos.filter((t) => t.id !== editTodo.id);
+    setTodos([editTodo, ...newTodos]);
+    setEditTodo("");
+  };
+
+  const handleDelete = (id) => {
+    const todo = todos.filter((t) => t.id !== id);
+    setTodos(todo);
   };
 
   const toggleButtons = () => {
@@ -37,14 +48,15 @@ function Todos() {
           <>
             <input
               type="text"
-              placeholder="odo..."
-              value={editTodo}
-              onChange={(e) => setEditTodo(e.target.value)}
+              value={editTodo && editTodo.title}
+              onChange={(e) =>
+                setEditTodo({ ...editTodo, title: e.target.value })
+              }
             />
             <button
               onMouseDown={toggleButtons}
               onMouseUp={toggleButtons}
-              onClick={handleAdd}
+              onClick={handleEdit}
             >
               {click ? "Editing new Todo" : "Edit"}
             </button>
@@ -57,7 +69,9 @@ function Todos() {
               value={addTodo}
               onChange={(e) => setAddTodo(e.target.value)}
             />
+
             <button
+              disabled={!addTodo}
               onMouseDown={toggleButtons}
               onMouseUp={toggleButtons}
               onClick={handleAdd}
@@ -68,7 +82,11 @@ function Todos() {
         )}
       </Input>
       <List>
-        <Todolist todos={todos} />
+        <Todolist
+          todos={todos}
+          setEditTodo={setEditTodo}
+          onDelete={handleDelete}
+        />
       </List>
     </Container>
   );
@@ -106,7 +124,7 @@ const Input = styled.div`
   min-width: 500px;
 
   input {
-    width: 340px;
+    width: 335px;
     height: 30px;
     margin-right: 20px;
     padding-left: 26px;
@@ -137,10 +155,8 @@ const Input = styled.div`
       cursor: pointer;
     }
 
-    :focus {
-    }
-
-    :after {
+    :disabled {
+      color: grey;
     }
   }
 `;

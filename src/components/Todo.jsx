@@ -3,14 +3,17 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-function Todo({ todo }) {
+function Todo({ todo, setEditTodo, onDelete }) {
   return (
     <Container>
       <p>{todo.title}</p>
       <div>
         <CheckCircleOutlineIcon className="icons" />
-        <EditIcon className="icons" />
-        <DeleteOutlineIcon className="icons" />
+        <EditIcon className="icons" onClick={() => setEditTodo(todo)} />
+        <DeleteOutlineIcon
+          className="icons"
+          onClick={() => onDelete(todo.id)}
+        />
       </div>
     </Container>
   );
