@@ -1,17 +1,74 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Todolist from "./Todolist";
+import RttIcon from "@mui/icons-material/Rtt";
+import { v4 as uuidv4 } from "uuid";
+
+const hej = [
+  { id: "1", title: "go and grab a burger", status: false },
+  { id: "2", title: "shop groceries", status: false },
+  { id: "3", title: "pay the gas bill", status: false },
+];
 
 function Todos() {
+  const [todos, setTodos] = useState(hej);
+  const [addTodo, setAddTodo] = useState("");
+  const [editTodo, setEditTodo] = useState("");
+  const [click, setClick] = useState(false);
+
+  const handleAdd = () => {
+    const todo = { id: uuidv4(), title: addTodo };
+    setTodos([...todos, todo]);
+    setAddTodo("");
+  };
+
+  const toggleButtons = () => {
+    setClick(click ? false : true);
+  };
+
   return (
     <Container>
       <Header>
         <p>Todos</p>
       </Header>
       <Input>
-        <input></input>
+        <RttIcon className="icon" />
+        {editTodo ? (
+          <>
+            <input
+              type="text"
+              placeholder="odo..."
+              value={editTodo}
+              onChange={(e) => setEditTodo(e.target.value)}
+            />
+            <button
+              onMouseDown={toggleButtons}
+              onMouseUp={toggleButtons}
+              onClick={handleAdd}
+            >
+              {click ? "Editing new Todo" : "Edit"}
+            </button>
+          </>
+        ) : (
+          <>
+            <input
+              type="text"
+              placeholder="odo..."
+              value={addTodo}
+              onChange={(e) => setAddTodo(e.target.value)}
+            />
+            <button
+              onMouseDown={toggleButtons}
+              onMouseUp={toggleButtons}
+              onClick={handleAdd}
+            >
+              {click ? "Adding new Todo" : "Add"}
+            </button>
+          </>
+        )}
       </Input>
       <List>
-        <Todolist />
+        <Todolist todos={todos} />
       </List>
     </Container>
   );
@@ -25,6 +82,7 @@ const Container = styled.div`
   grid-template-areas: "header" "input" "list";
   border: 1px solid black;
   padding: 80px;
+  background-color: white;
 `;
 
 const Header = styled.div`
@@ -41,10 +99,49 @@ const Header = styled.div`
 const Input = styled.div`
   grid-area: input;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid black;
+  justify-content: space-between;
+  min-width: 500px;
 
   input {
-    padding: 10px 90px;
+    width: 340px;
+    height: 30px;
+    margin-right: 20px;
+    padding-left: 26px;
+    border: none;
+    outline: 0;
+
+    :focus {
+      border: none;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    left: 4px;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    background-color: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+
+    :hover {
+      border-top: 1px solid black;
+      cursor: pointer;
+    }
+
+    :focus {
+    }
+
+    :after {
+    }
   }
 `;
 
