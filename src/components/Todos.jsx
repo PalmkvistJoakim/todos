@@ -17,7 +17,7 @@ function Todos() {
   const [click, setClick] = useState(false);
 
   const handleAdd = () => {
-    const todo = { id: uuidv4(), title: addTodo };
+    const todo = { id: uuidv4(), title: addTodo, status: false };
     setTodos([todo, ...todos]);
     setAddTodo("");
   };
@@ -33,10 +33,20 @@ function Todos() {
     setTodos(todo);
   };
 
-  const toggleButtons = () => {
-    setClick(click ? false : true);
+  const handleDone = (id) => {
+    const todo = todos.map((t) => {
+      if (t.id === id) {
+        return { ...t, status: !t.status };
+      }
+
+      return t;
+    });
+    setTodos(todo);
   };
 
+  const toggleButtons = () => {
+    setClick(!click);
+  };
   return (
     <Container>
       <Header>
@@ -86,6 +96,7 @@ function Todos() {
           todos={todos}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
+          onDone={handleDone}
         />
       </List>
     </Container>

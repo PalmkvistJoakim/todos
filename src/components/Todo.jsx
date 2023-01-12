@@ -2,14 +2,24 @@ import styled from "styled-components";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-function Todo({ todo, setEditTodo, onDelete }) {
+function Todo({ todo, setEditTodo, onDelete, onDone }) {
   return (
     <Container>
-      <p>{todo.title}</p>
+      <p className={todo.status ? "lineThrough" : ""}>{todo.title}</p>
       <div>
-        <CheckCircleOutlineIcon className="icons" />
-        <EditIcon className="icons" onClick={() => setEditTodo(todo)} />
+        {todo.status ? (
+          <CheckCircleIcon className="icons" onClick={() => onDone(todo.id)} />
+        ) : (
+          <CheckCircleOutlineIcon
+            className="icons"
+            onClick={() => onDone(todo.id)}
+          />
+        )}
+        {todo.status ? null : (
+          <EditIcon className="icons" onClick={() => setEditTodo(todo)} />
+        )}
         <DeleteOutlineIcon
           className="icons"
           onClick={() => onDelete(todo.id)}
@@ -37,5 +47,9 @@ const Container = styled.div`
     font-size: large;
     cursor: pointer;
     margin-left: 4px;
+  }
+
+  .lineThrough {
+    text-decoration: line-through;
   }
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Todo from "./Todo";
 
-function Todolist({ todos, setEditTodo, onDelete }) {
+function Todolist({ todos, setEditTodo, onDelete, onDone }) {
   return (
     <Container>
       {todos.map((todo) => {
@@ -11,6 +11,7 @@ function Todolist({ todos, setEditTodo, onDelete }) {
             todo={todo}
             setEditTodo={setEditTodo}
             onDelete={onDelete}
+            onDone={onDone}
           />
         );
       })}
