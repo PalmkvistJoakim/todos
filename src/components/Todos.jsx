@@ -5,9 +5,30 @@ import RttIcon from "@mui/icons-material/Rtt";
 import { v4 as uuidv4 } from "uuid";
 
 const hej = [
-  { id: "1", title: "go and grab a burger", status: false },
-  { id: "2", title: "shop groceries", status: false },
-  { id: "3", title: "pay the gas bill", status: false },
+  {
+    id: "1",
+    title: "Go and grab a burger",
+    status: true,
+    date: Date(),
+    isDone: false,
+    list: "Done",
+  },
+  {
+    id: "2",
+    title: "Shop groceries",
+    status: false,
+    date: Date(),
+    isDone: true,
+    list: "Ongoing",
+  },
+  {
+    id: "3",
+    title: "Pay the gas bill",
+    status: false,
+    date: Date(),
+    isDone: false,
+    list: "List",
+  },
 ];
 
 function Todos() {
@@ -17,7 +38,7 @@ function Todos() {
   const [click, setClick] = useState(false);
 
   const handleAdd = () => {
-    const todo = { id: uuidv4(), title: addTodo, status: false };
+    const todo = { id: uuidv4(), title: addTodo, status: false, date: Date() };
     setTodos([todo, ...todos]);
     setAddTodo("");
   };
@@ -36,7 +57,7 @@ function Todos() {
   const handleDone = (id) => {
     const todo = todos.map((t) => {
       if (t.id === id) {
-        return { ...t, status: !t.status };
+        return { ...t, isDone: !t.isDone };
       }
 
       return t;
@@ -93,7 +114,21 @@ function Todos() {
       </Input>
       <List>
         <Todolist
-          todos={todos}
+          todos={todos.filter((todo) => todo.status === true)}
+          setEditTodo={setEditTodo}
+          onDelete={handleDelete}
+          onDone={handleDone}
+        />
+        <Todolist
+          todos={todos.filter(
+            (todo) => todo.isDone === false && todo.status === false
+          )}
+          setEditTodo={setEditTodo}
+          onDelete={handleDelete}
+          onDone={handleDone}
+        />
+        <Todolist
+          todos={todos.filter((todo) => todo.isDone === true)}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
@@ -174,6 +209,6 @@ const Input = styled.div`
 
 const List = styled.div`
   grid-area: list;
-  display: flex;
+  display: grid;
   justify-content: center;
 `;
