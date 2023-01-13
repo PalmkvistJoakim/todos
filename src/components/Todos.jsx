@@ -107,7 +107,7 @@ function Todos() {
               onMouseUp={toggleButtons}
               onClick={handleEdit}
             >
-              {click ? "Editing new Todo" : "Edit"}
+              {click ? "Editing Todo" : "Edit"}
             </button>
           </>
         ) : (
@@ -139,6 +139,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
+          title="Started, "
         />
         <Todolist
           todos={todos.filter(
@@ -148,6 +149,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
+          title="List, "
         />
         <Todolist
           todos={todos.filter(
@@ -157,6 +159,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
+          title="Done, "
         />
       </List>
     </Container>
@@ -195,7 +198,7 @@ const Input = styled.div`
   min-width: 500px;
 
   input {
-    width: 335px;
+    min-width: 67%;
     height: 30px;
     margin-right: 20px;
     padding-left: 26px;

@@ -5,11 +5,12 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import CheckIcon from "@mui/icons-material/Check";
 
 function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
   const leftIcons = () => {
     if (todo.status === false && todo.isDone === true) {
-      return null;
+      return <CheckIcon className="icons" />;
     }
     return todo.status ? (
       <RemoveIcon className="icons" onClick={() => onStatus(todo.id)} />
@@ -53,7 +54,8 @@ export default Todo;
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  margin-right: 30px;
 
   .icons {
     font-size: large;
@@ -64,10 +66,9 @@ const Container = styled.div`
 
 const Inner = styled.div`
   display: flex;
-  border-bottom: 1px solid black;
   justify-content: space-between;
   margin-left: 10px;
-  min-width: 200px;
+  min-width: 100%;
 
   p {
     margin-right: 20px;
