@@ -4,29 +4,29 @@ import Todolist from "./Todolist";
 import RttIcon from "@mui/icons-material/Rtt";
 import { v4 as uuidv4 } from "uuid";
 
-// const hej = [
-//   {
-//     id: "1",
-//     title: "Go and grab a burger",
-//     status: true,
-//     date: Date(),
-//     isDone: false,
-//   },
-//   {
-//     id: "2",
-//     title: "Shop groceries",
-//     status: false,
-//     date: Date(),
-//     isDone: true,
-//   },
-//   {
-//     id: "3",
-//     title: "Pay the gas bill",
-//     status: false,
-//     date: Date(),
-//     isDone: false,
-//   },
-// ];
+const hej = [
+  {
+    id: "1",
+    title: "Go and grab a burger",
+    status: true,
+    date: Date(),
+    isDone: false,
+  },
+  {
+    id: "2",
+    title: "Shop groceries",
+    status: false,
+    date: Date(),
+    isDone: true,
+  },
+  {
+    id: "3",
+    title: "Pay the gas bill",
+    status: false,
+    date: Date(),
+    isDone: false,
+  },
+];
 
 function Todos() {
   const savedTodos = JSON.parse(localStorage.getItem("todos"));
