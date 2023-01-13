@@ -4,11 +4,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-function Todo({ todo, setEditTodo, onDelete, onDone }) {
+function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
+  const leftIcons = () => {
+    if (todo.status === false && todo.isDone === true) {
+      return null;
+    }
+    return todo.status ? (
+      <RemoveIcon className="icons" onClick={() => onStatus(todo.id)} />
+    ) : (
+      <AddIcon className="icons" onClick={() => onStatus(todo.id)} />
+    );
+  };
+
   return (
     <Container>
-      <AddIcon className="icons" />
+      {leftIcons()}
       <Inner>
         <p className={todo.isDone ? "lineThrough" : ""}>{todo.title}</p>
         <div>

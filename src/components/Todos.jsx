@@ -11,7 +11,6 @@ const hej = [
     status: true,
     date: Date(),
     isDone: false,
-    list: "Done",
   },
   {
     id: "2",
@@ -19,7 +18,6 @@ const hej = [
     status: false,
     date: Date(),
     isDone: true,
-    list: "Ongoing",
   },
   {
     id: "3",
@@ -27,7 +25,6 @@ const hej = [
     status: false,
     date: Date(),
     isDone: false,
-    list: "List",
   },
 ];
 
@@ -38,7 +35,13 @@ function Todos() {
   const [click, setClick] = useState(false);
 
   const handleAdd = () => {
-    const todo = { id: uuidv4(), title: addTodo, status: false, date: Date() };
+    const todo = {
+      id: uuidv4(),
+      title: addTodo,
+      status: false,
+      date: Date(),
+      isDone: false,
+    };
     setTodos([todo, ...todos]);
     setAddTodo("");
   };
@@ -56,8 +59,22 @@ function Todos() {
 
   const handleDone = (id) => {
     const todo = todos.map((t) => {
+      if (t.id === id && t.status === true) {
+        return { ...t, status: !t.status, isDone: !t.isDone };
+      }
       if (t.id === id) {
         return { ...t, isDone: !t.isDone };
+      }
+
+      return t;
+    });
+    setTodos(todo);
+  };
+
+  const handleStatus = (id) => {
+    const todo = todos.map((t) => {
+      if (t.id === id) {
+        return { ...t, status: !t.status };
       }
 
       return t;
@@ -68,6 +85,7 @@ function Todos() {
   const toggleButtons = () => {
     setClick(!click);
   };
+
   return (
     <Container>
       <Header>
@@ -114,10 +132,13 @@ function Todos() {
       </Input>
       <List>
         <Todolist
-          todos={todos.filter((todo) => todo.status === true)}
+          todos={todos.filter(
+            (todo) => todo.status === true && todo.isDone === false
+          )}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
+          onStatus={handleStatus}
         />
         <Todolist
           todos={todos.filter(
@@ -126,12 +147,16 @@ function Todos() {
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
+          onStatus={handleStatus}
         />
         <Todolist
-          todos={todos.filter((todo) => todo.isDone === true)}
+          todos={todos.filter(
+            (todo) => todo.isDone === true && todo.status === false
+          )}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
+          onStatus={handleStatus}
         />
       </List>
     </Container>
