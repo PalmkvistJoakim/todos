@@ -38,7 +38,7 @@ function Todos() {
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-
+  console.log(todos);
   const handleAdd = () => {
     const todo = {
       id: uuidv4(),
