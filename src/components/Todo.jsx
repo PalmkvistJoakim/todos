@@ -54,7 +54,7 @@ export default Todo;
 const Container = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   margin-right: 30px;
 
   .icons {

@@ -7,7 +7,7 @@ function Todolist({ todos, setEditTodo, onDelete, onDone, onStatus, title }) {
     <Container>
       <p className="lists">
         {title}
-        {todos.length}
+        <span>{todos.length}</span>
       </p>
       {todos.map((todo) => {
         return (
@@ -28,13 +28,23 @@ function Todolist({ todos, setEditTodo, onDelete, onDone, onStatus, title }) {
 export default Todolist;
 
 const Container = styled.div`
-  border-right: 1px solid black;
   border-bottom: 1px solid black;
   padding: 30px;
   margin-top: 30px;
 
   .lists {
+    font-weight: bold;
     margin-bottom: 20px;
     margin-left: -30px;
+  }
+
+  span {
+    background-color: whitesmoke;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 30px;
+    line-height: 30px;
   }
 `;

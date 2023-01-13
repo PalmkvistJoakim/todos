@@ -139,7 +139,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
-          title="Started, "
+          title="Started "
         />
         <Todolist
           todos={todos.filter(
@@ -149,7 +149,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
-          title="List, "
+          title="List "
         />
         <Todolist
           todos={todos.filter(
@@ -159,7 +159,7 @@ function Todos() {
           onDelete={handleDelete}
           onDone={handleDone}
           onStatus={handleStatus}
-          title="Done, "
+          title="Done "
         />
       </List>
     </Container>
@@ -172,7 +172,8 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 10rem 2rem 1fr;
   grid-template-areas: "header" "input" "list";
-  border: 1px solid black;
+  box-shadow: 6px 6px 12px;
+  border-radius: 20px;
   padding: 80px;
   background-color: white;
 `;
