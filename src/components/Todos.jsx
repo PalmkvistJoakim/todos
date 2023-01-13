@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Todolist from "./Todolist";
 import RttIcon from "@mui/icons-material/Rtt";
@@ -29,10 +29,15 @@ const hej = [
 ];
 
 function Todos() {
-  const [todos, setTodos] = useState(hej);
+  const savedTodos = JSON.parse(localStorage.getItem("todos"));
+  const [todos, setTodos] = useState(savedTodos);
   const [addTodo, setAddTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
   const [click, setClick] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleAdd = () => {
     const todo = {

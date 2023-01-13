@@ -19,30 +19,36 @@ function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
     );
   };
 
+  const circleIcons = () => {
+    if (!todo.status && !todo.isDone) {
+      return null;
+    }
+    return todo.isDone ? (
+      <CheckCircleIcon className="icons" onClick={() => onDone(todo.id)} />
+    ) : (
+      <CheckCircleOutlineIcon
+        className="icons"
+        onClick={() => onDone(todo.id)}
+      />
+    );
+  };
+
   return (
     <Container>
       {leftIcons()}
       <Inner>
         <p className={todo.isDone ? "lineThrough" : ""}>{todo.title}</p>
         <div>
-          {todo.isDone ? (
-            <CheckCircleIcon
-              className="icons"
-              onClick={() => onDone(todo.id)}
-            />
-          ) : (
-            <CheckCircleOutlineIcon
-              className="icons"
-              onClick={() => onDone(todo.id)}
-            />
-          )}
+          {circleIcons()}
           {todo.isDone ? null : (
             <EditIcon className="icons" onClick={() => setEditTodo(todo)} />
           )}
-          <DeleteOutlineIcon
-            className="icons"
-            onClick={() => onDelete(todo.id)}
-          />
+          {todo.status ? null : (
+            <DeleteOutlineIcon
+              className="icons"
+              onClick={() => onDelete(todo.id)}
+            />
+          )}
         </div>
       </Inner>
     </Container>
