@@ -3,16 +3,8 @@ import styled from "styled-components";
 import Todolist from "./Todolist";
 import RttIcon from "@mui/icons-material/Rtt";
 import { v4 as uuidv4 } from "uuid";
+import { getLocalStorage } from "../services/localStorage";
 
-const getLocalStorage = () => {
-  const savedTodos = localStorage.getItem("todos");
-
-  if (savedTodos) {
-    return JSON.parse(localStorage.getItem("todos"));
-  } else {
-    return [];
-  }
-};
 function Todos() {
   const [todos, setTodos] = useState(getLocalStorage());
   const [addTodo, setAddTodo] = useState("");
@@ -48,12 +40,10 @@ function Todos() {
 
   const handleDone = (id) => {
     const todo = todos.map((t) => {
-      if (t.id === id && t.status === true) {
+      if (t.id === id && t.status === true)
         return { ...t, status: !t.status, isDone: !t.isDone };
-      }
-      if (t.id === id) {
-        return { ...t, isDone: !t.isDone };
-      }
+
+      if (t.id === id) return { ...t, isDone: !t.isDone };
 
       return t;
     });
@@ -62,9 +52,7 @@ function Todos() {
 
   const handleStatus = (id) => {
     const todo = todos.map((t) => {
-      if (t.id === id) {
-        return { ...t, status: !t.status };
-      }
+      if (t.id === id) return { ...t, status: !t.status };
 
       return t;
     });

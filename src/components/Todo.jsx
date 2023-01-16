@@ -9,9 +9,9 @@ import CheckIcon from "@mui/icons-material/Check";
 
 function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
   const leftIcons = () => {
-    if (todo.status === false && todo.isDone === true) {
+    if (todo.status === false && todo.isDone === true)
       return <CheckIcon className="icons" />;
-    }
+
     return todo.status ? (
       <RemoveIcon className="icons" onClick={() => onStatus(todo.id)} />
     ) : (
@@ -20,9 +20,8 @@ function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
   };
 
   const circleIcons = () => {
-    if (!todo.status && !todo.isDone) {
-      return null;
-    }
+    if (!todo.status && !todo.isDone) return null;
+
     return todo.isDone ? (
       <CheckCircleIcon className="icons" onClick={() => onDone(todo.id)} />
     ) : (
