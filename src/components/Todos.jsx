@@ -4,33 +4,8 @@ import Todolist from "./Todolist";
 import RttIcon from "@mui/icons-material/Rtt";
 import { v4 as uuidv4 } from "uuid";
 
-// const hej = [
-//   {
-//     id: "1",
-//     title: "Go and grab a burger",
-//     status: true,
-//     date: Date(),
-//     isDone: false,
-//   },
-//   {
-//     id: "2",
-//     title: "Shop groceries",
-//     status: false,
-//     date: Date(),
-//     isDone: true,
-//   },
-//   {
-//     id: "3",
-//     title: "Pay the gas bill",
-//     status: false,
-//     date: Date(),
-//     isDone: false,
-//   },
-// ];
-
 const getLocalStorage = () => {
   const savedTodos = localStorage.getItem("todos");
-  console.log(savedTodos);
 
   if (savedTodos) {
     return JSON.parse(localStorage.getItem("todos"));
@@ -39,16 +14,14 @@ const getLocalStorage = () => {
   }
 };
 function Todos() {
-  // const savedTodos = JSON.parse(localStorage.getItem("todos"));
   const [todos, setTodos] = useState(getLocalStorage());
   const [addTodo, setAddTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
   const [click, setClick] = useState(false);
-  console.log(todos);
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-  console.log(todos);
 
   const handleAdd = () => {
     const todo = {
