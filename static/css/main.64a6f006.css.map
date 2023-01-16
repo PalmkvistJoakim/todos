@@ -1,1 +1,1 @@
-{"version":3,"file":"static/css/main.64a6f006.css","mappings":"AAAA,EAGE,sBAA0B,CAF1B,QAAS,CACT,SAEF","sources":["app.css"],"sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: \"lora\", serif;\r\n}\r\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"static/css/main.64a6f006.css","mappings":"AAAA,EAGE,sBAA0B,CAF1B,QAAS,CACT,SAEF","sources":["App.css"],"sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  font-family: \"lora\", serif;\r\n}\r\n"],"names":[],"sourceRoot":""}
