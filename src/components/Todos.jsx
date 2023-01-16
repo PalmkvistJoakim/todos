@@ -28,17 +28,28 @@ import { v4 as uuidv4 } from "uuid";
 //   },
 // ];
 
+const getLocalStorage = () => {
+  const savedTodos = localStorage.getItem("todos");
+  console.log(savedTodos);
+
+  if (savedTodos) {
+    return JSON.parse(localStorage.getItem("todos"));
+  } else {
+    return [];
+  }
+};
 function Todos() {
-  const savedTodos = JSON.parse(localStorage.getItem("todos"));
-  const [todos, setTodos] = useState(savedTodos);
+  // const savedTodos = JSON.parse(localStorage.getItem("todos"));
+  const [todos, setTodos] = useState(getLocalStorage());
   const [addTodo, setAddTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
   const [click, setClick] = useState(false);
-
+  console.log(todos);
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
   console.log(todos);
+
   const handleAdd = () => {
     const todo = {
       id: uuidv4(),
