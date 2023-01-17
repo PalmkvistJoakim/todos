@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Todo from "./Todo";
 
-function Todolist({ todos, setEditTodo, onDelete, onDone, onStatus, title }) {
+function Todolist({ todos, setEditTodo, onDelete, onDone, onStart, title }) {
   if (todos.length === 0) return null;
   return (
     <Container>
@@ -17,7 +17,7 @@ function Todolist({ todos, setEditTodo, onDelete, onDone, onStatus, title }) {
             setEditTodo={setEditTodo}
             onDelete={onDelete}
             onDone={onDone}
-            onStatus={onStatus}
+            onStart={onStart}
           />
         );
       })}

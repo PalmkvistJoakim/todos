@@ -19,7 +19,7 @@ function Todos() {
     const todo = {
       id: uuidv4(),
       title: addTodo,
-      status: false,
+      isStarted: false,
       date: Date(),
       isDone: false,
     };
@@ -40,8 +40,8 @@ function Todos() {
 
   const handleDone = (id) => {
     const todo = todos.map((t) => {
-      if (t.id === id && t.status === true)
-        return { ...t, status: !t.status, isDone: !t.isDone };
+      if (t.id === id && t.isStarted === true)
+        return { ...t, isStarted: !t.isStarted, isDone: !t.isDone };
 
       if (t.id === id) return { ...t, isDone: !t.isDone };
 
@@ -50,9 +50,9 @@ function Todos() {
     setTodos(todo);
   };
 
-  const handleStatus = (id) => {
+  const handleStart = (id) => {
     const todo = todos.map((t) => {
-      if (t.id === id) return { ...t, status: !t.status };
+      if (t.id === id) return { ...t, isStarted: !t.isStarted };
 
       return t;
     });
@@ -110,32 +110,32 @@ function Todos() {
       <List>
         <Todolist
           todos={todos.filter(
-            (todo) => todo.status === true && todo.isDone === false
+            (todo) => todo.isStarted === true && todo.isDone === false
           )}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
-          onStatus={handleStatus}
+          onStart={handleStart}
           title="Started "
         />
         <Todolist
           todos={todos.filter(
-            (todo) => todo.isDone === false && todo.status === false
+            (todo) => todo.isDone === false && todo.isStarted === false
           )}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
-          onStatus={handleStatus}
+          onStart={handleStart}
           title="List "
         />
         <Todolist
           todos={todos.filter(
-            (todo) => todo.isDone === true && todo.status === false
+            (todo) => todo.isDone === true && todo.isStarted === false
           )}
           setEditTodo={setEditTodo}
           onDelete={handleDelete}
           onDone={handleDone}
-          onStatus={handleStatus}
+          onStart={handleStart}
           title="Done "
         />
       </List>

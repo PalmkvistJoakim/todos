@@ -7,26 +7,26 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CheckIcon from "@mui/icons-material/Check";
 
-function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
+function Todo({ todo, setEditTodo, onDelete, onDone, onStart }) {
   const leftIcons = () => {
-    if (todo.status === false && todo.isDone === true)
-      return <CheckIcon className="icons" />;
+    if (todo.isStarted === false && todo.isDone === true)
+      return <CheckIcon className="icon" />;
 
-    return todo.status ? (
-      <RemoveIcon className="icons" onClick={() => onStatus(todo.id)} />
+    return todo.isStarted ? (
+      <RemoveIcon className="icon" onClick={() => onStart(todo.id)} />
     ) : (
-      <AddIcon className="icons" onClick={() => onStatus(todo.id)} />
+      <AddIcon className="icon" onClick={() => onStart(todo.id)} />
     );
   };
 
   const circleIcons = () => {
-    if (!todo.status && !todo.isDone) return null;
+    if (!todo.isStarted && !todo.isDone) return null;
 
     return todo.isDone ? (
-      <CheckCircleIcon className="icons" onClick={() => onDone(todo.id)} />
+      <CheckCircleIcon className="icon" onClick={() => onDone(todo.id)} />
     ) : (
       <CheckCircleOutlineIcon
-        className="icons"
+        className="icon"
         onClick={() => onDone(todo.id)}
       />
     );
@@ -39,12 +39,12 @@ function Todo({ todo, setEditTodo, onDelete, onDone, onStatus }) {
         <p className={todo.isDone ? "lineThrough" : ""}>{todo.title}</p>
         <div>
           {circleIcons()}
-          {todo.isDone ? null : (
-            <EditIcon className="icons" onClick={() => setEditTodo(todo)} />
+          {!todo.isDone && (
+            <EditIcon className="icon" onClick={() => setEditTodo(todo)} />
           )}
-          {todo.status ? null : (
+          {!todo.isStarted && (
             <DeleteOutlineIcon
-              className="icons"
+              className="icon"
               onClick={() => onDelete(todo.id)}
             />
           )}
@@ -62,7 +62,7 @@ const Container = styled.div`
   margin-bottom: 3px;
   margin-right: 30px;
 
-  .icons {
+  .icon {
     font-size: large;
     cursor: pointer;
     margin-left: 4px;
