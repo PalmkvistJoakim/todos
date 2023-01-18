@@ -9,7 +9,7 @@ function Todos() {
   const [todos, setTodos] = useState(getLocalStorage());
   const [addTodo, setAddTodo] = useState("");
   const [editTodo, setEditTodo] = useState("");
-  const [click, setClick] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -60,7 +60,7 @@ function Todos() {
   };
 
   const toggleButtons = () => {
-    setClick(!click);
+    setIsClicked(!isClicked);
   };
 
   return (
@@ -84,7 +84,7 @@ function Todos() {
               onMouseUp={toggleButtons}
               onClick={handleEdit}
             >
-              {click ? "Editing Todo" : "Edit"}
+              {isClicked ? "Editing Todo" : "Edit"}
             </button>
           </>
         ) : (
@@ -102,7 +102,7 @@ function Todos() {
               onMouseUp={toggleButtons}
               onClick={handleAdd}
             >
-              {click ? "Adding new Todo" : "Add"}
+              {isClicked ? "Adding new Todo" : "Add"}
             </button>
           </>
         )}
