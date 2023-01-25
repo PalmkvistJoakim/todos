@@ -9,8 +9,7 @@ import CheckIcon from "@mui/icons-material/Check";
 
 function Todo({ todo, setEditTodo, onDelete, onDone, onStart }) {
   const leftIcons = () => {
-    if (todo.isStarted === false && todo.isDone === true)
-      return <CheckIcon className="icon" />;
+    if (!todo.isStarted && todo.isDone) return <CheckIcon className="icon" />;
 
     return todo.isStarted ? (
       <RemoveIcon className="icon" onClick={() => onStart(todo.id)} />
@@ -36,7 +35,7 @@ function Todo({ todo, setEditTodo, onDelete, onDone, onStart }) {
     <Container>
       {leftIcons()}
       <Inner>
-        <p className={todo.isDone ? "lineThrough" : ""}>{todo.title}</p>
+        <p className={todo.isDone ? "line-through" : ""}>{todo.title}</p>
         <div>
           {circleIcons()}
           {!todo.isDone && (
@@ -79,7 +78,7 @@ const Inner = styled.div`
     margin-right: 20px;
   }
 
-  .lineThrough {
+  .line-through {
     text-decoration: line-through;
   }
 `;

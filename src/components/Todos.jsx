@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Todolist from "./Todolist";
+import TodoList from "./TodoList";
 import RttIcon from "@mui/icons-material/Rtt";
 import { v4 as uuidv4 } from "uuid";
 import { getLocalStorage } from "../services/localStorage";
@@ -20,7 +20,7 @@ function Todos() {
       id: uuidv4(),
       title: addTodo,
       isStarted: false,
-      date: Date(),
+      date: new Date(),
       isDone: false,
     };
     setTodos([todo, ...todos]);
@@ -108,7 +108,7 @@ function Todos() {
         )}
       </Input>
       <List>
-        <Todolist
+        <TodoList
           todos={todos.filter(
             (todo) => todo.isStarted === true && todo.isDone === false
           )}
@@ -118,7 +118,7 @@ function Todos() {
           onStart={handleStart}
           title="Started "
         />
-        <Todolist
+        <TodoList
           todos={todos.filter(
             (todo) => todo.isDone === false && todo.isStarted === false
           )}
@@ -128,7 +128,7 @@ function Todos() {
           onStart={handleStart}
           title="List "
         />
-        <Todolist
+        <TodoList
           todos={todos.filter(
             (todo) => todo.isDone === true && todo.isStarted === false
           )}

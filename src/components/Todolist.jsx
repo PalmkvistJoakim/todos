@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Todo from "./Todo";
 
-function Todolist({ todos, setEditTodo, onDelete, onDone, onStart, title }) {
+function TodoList({ todos, setEditTodo, onDelete, onDone, onStart, title }) {
   if (todos.length === 0) return null;
   return (
     <Container>
@@ -25,7 +25,7 @@ function Todolist({ todos, setEditTodo, onDelete, onDone, onStart, title }) {
   );
 }
 
-export default Todolist;
+export default TodoList;
 
 const Container = styled.div`
   border-bottom: 1px solid black;
